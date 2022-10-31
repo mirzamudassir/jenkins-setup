@@ -6,10 +6,10 @@ pipeline{
         AUTHOR_EMAIL= 'mudassir@parseclabs.ca'
     }
     parameters{
-        string(name: 'AuthorName', defaultValue: 'Mudassir', description: 'This is author name')
-        booleanParam(name: 'Toggle', defaultValue: true, description: 'Toggle this value')
-        choice(name: 'Choice', choices: ['one', 'two', 'three'], description: 'You have your own choice')
-        password(name: 'Password', defaultValue: 'SECRET', description: 'Enter your password')
+        string(name: 'AUTHOR_NAME', defaultValue: 'Mudassir', description: 'This is author name')
+        booleanParam(name: 'TOGGLE', defaultValue: true, description: 'Toggle this value')
+        choice(name: 'CHOICE', choices: ['one', 'two', 'three'], description: 'You have your own choice')
+        password(name: 'PASSWORD', defaultValue: 'SECRET', description: 'Enter your password')
     }
 
     stages{
@@ -37,19 +37,13 @@ pipeline{
                 echo "2: And, ${localVar}"
             }
         }
-        stage("Checking the Options"){
-            steps{
-                echo "Settins the timeout for pipeline..."
-                timeout(time: 30, unit: 'MINUTES')
-            }
-        }
         stage("Checking the Parameters"){
             steps{
                 echo "Cheking the defined parameters..."
-                echo "Hi, my name is ${params.AuthorName}"
-                echo "Toggle: ${params.Toggle}"
-                echo "Choice: ${params.Choice}"
-                echo "Passcode: ${params.Password}"
+                echo "Hi, my name is ${params.AUTHOR_NAME}"
+                echo "Toggle: ${params.TOGGLE}"
+                echo "Choice: ${params.CHOICE}"
+                echo "Passcode: ${params.PASSWORD}"
             }
         }
         stage("Checking the Input"){
@@ -58,7 +52,7 @@ pipeline{
                 ok "Yes, offcourse"
             } 
             steps{
-                echo "Hi ${AuthorName}, Nice to meet you. I have checked the inputs successfully."
+                echo "Hi ${AUTHOR_NAME}, Nice to meet you. I have checked the inputs successfully."
             }
         }
         stage("Checking the When"){
