@@ -63,9 +63,7 @@ pipeline{
         }
         stage("Checking the When"){
             when{
-                def x=1
-                def y=1
-                x=y
+                equals expected: 1, actual: 1
             }
             steps{
                 echo "If you are seeing this, when block is executed successfully..."
@@ -93,11 +91,11 @@ pipeline{
             echo "Sending email for job success..."
 
             mail charset: 'UTF-8', from: '', mimeType: 'text/html',
-            to: "${AUTHOR_EMAIL}"
-            replyTo: ''
-            cc: ''
-            bcc: ''
-            subject: "Build successfull for Commit ${env.CHANGE_HASH} -> ${env.JOB_NAME}"
+            to: "${AUTHOR_EMAIL}",
+            replyTo: '',
+            cc: '',
+            bcc: '',
+            subject: "Build successfull for Commit ${env.CHANGE_HASH} -> ${env.JOB_NAME}",
             body: "<br> Dear ${env.CHANGE_AUTHOR},<br><br> The build ${env.BUILD_NUMBER} for Project: ${env.JOB_NAME} completed successfully!<br><br>" +
             "Please visit the following URL to verify:<br> URL: ${env.BUILD_URL}<br><br>Regards,<br>Jenkins CI";
         }
@@ -106,11 +104,11 @@ pipeline{
             echo "Sending email for job failed..."
 
             mail charset: 'UTF-8', from: '', mimeType: 'text/html',
-            to: "${AUTHOR_EMAIL}"
-            replyTo: ''
-            cc: ''
-            bcc: ''
-            subject: "Build Failed for Commit ${env.CHANGE_HASH} -> ${env.JOB_NAME}"
+            to: "${AUTHOR_EMAIL}",
+            replyTo: '',
+            cc: '',
+            bcc: '',
+            subject: "Build Failed for Commit ${env.CHANGE_HASH} -> ${env.JOB_NAME}",
             body: "<br> Dear ${env.CHANGE_AUTHOR},<br><br> The build ${env.BUILD_NUMBER} for Project: ${env.JOB_NAME} Failed!<br><br>" +
             "Please visit the following URL to verify:<br> URL: ${env.BUILD_URL}<br><br>Regards,<br>Jenkins CI";
         }
@@ -119,7 +117,7 @@ pipeline{
             echo 'Sending email for unstable job!'
             mail charset: 'UTF-8', from: '', mimeType: 'text/html',
             to: "${AUTHOR_EMAIL}",
-            cc: '',
+            cc: '',,
             replyTo: '',
             bcc: '',
             subject: "Build is Unstable -> ${env.JOB_NAME}",
