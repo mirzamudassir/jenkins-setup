@@ -50,6 +50,7 @@ pipeline{
             input{
                 message "Should we continue"
                 ok "Yes, offcourse"
+                return true
             } 
             steps{
                 echo "Hi ${AUTHOR_NAME}, Nice to meet you. I have checked the inputs successfully."
