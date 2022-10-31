@@ -7,7 +7,7 @@ pipeline{
     }
     parameters{
         string(name: 'AuthorName', defaultValue: 'Mudassir', description: 'This is author name')
-        booleanParam(namne: 'Toggle', defaultValue: true, description: 'Toggle this value')
+        booleanParam(name: 'Toggle', defaultValue: true, description: 'Toggle this value')
         choice(name: 'Choice', choices: ['one', 'two', 'three'], description: 'You have your own choice')
         password(name: 'Password', defaultValue: 'SECRET', description: 'Enter your password')
     }
