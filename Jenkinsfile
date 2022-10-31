@@ -117,7 +117,7 @@ pipeline{
             echo 'Sending email for unstable job!'
             mail charset: 'UTF-8', from: '', mimeType: 'text/html',
             to: "${AUTHOR_EMAIL}",
-            cc: '',,
+            cc: '',
             replyTo: '',
             bcc: '',
             subject: "Build is Unstable -> ${env.JOB_NAME}",
