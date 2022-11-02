@@ -75,7 +75,7 @@ pipeline{
                 emall = sh returnStdout:true,  script:'git log -n 1 --pretty=format:%ae'
                 gitcmail= sh returnStdout:true,  script:'git log -n 1 --pretty=format:%ce'
                 echo "git author email is ${emall}"
-                echo "git commitor email is ${gitcmail}
+                echo "git commitor email is ${gitcmail}"
             }
         }
     }
