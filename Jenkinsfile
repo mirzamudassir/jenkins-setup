@@ -18,9 +18,9 @@ pipeline{
                 script {
                     env.CHANGE_COMMIT_MSG = sh (script: 'git log -1 --pretty=%B', returnStdout: true).trim()
                     env.CHANGE_AUTHOR = sh (script: 'git log -1 --pretty=%cn', returnStdout: true).trim()
-                    env.CHANGE_AUTHOR_EMAIL = sh (script: 'git log -1 --pretty=%ae', returnStdout: true).trim()
-                    env.CHANGE_COMMITOR_EMAIL = sh (script: 'git log -1 --pretty=%ce', returnStdout: true).trim()
-                    env.CHANGE_HASH = sh (script: 'git log -1 --pretty=%h', returnStdout: true).trim()
+                    env.CHANGE_AUTHOR_EMAIL = sh (script: 'git log --pretty=%ae', returnStdout: true).trim()
+                    env.CHANGE_COMMITOR_EMAIL = sh (script: 'git log --pretty=%ce', returnStdout: true).trim()
+                    env.CHANGE_HASH = sh (script: 'git log --pretty=%h', returnStdout: true).trim()
                     echo "Author ${env.CHANGE_AUTHOR}"
                     echo "Author EMAIL: ${env.CHANGE_AUTHOR_EMAIL}"
                     echo "Commitor EMAIL: ${env.CHANGE_COMMITOR_EMAIL}"
