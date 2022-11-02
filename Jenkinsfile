@@ -23,7 +23,7 @@ pipeline{
                     env.CHANGE_HASH = sh (script: 'git log -1 --pretty=%h', returnStdout: true).trim()
                     echo "Author ${env.CHANGE_AUTHOR}"
                     echo "Author EMAIL: ${env.CHANGE_AUTHOR_EMAIL}"
-                    echo "Author EMAIL: ${env.CHANGE_COMMITOR_EMAIL}"
+                    echo "Commitor EMAIL: ${env.CHANGE_COMMITOR_EMAIL}"
                     echo "Commit Message:  ${env.CHANGE_COMMIT_MSG}"
                     echo "Commit Hash:  ${env.CHANGE_HASH}"
                 }
@@ -87,7 +87,7 @@ pipeline{
             echo "Sending email for job success..."
             
             mail charset: 'UTF-8', from: '', mimeType: 'text/html',
-            to: "${AUTHOR_EMAIL}",
+            to: "${env.CHANGE_AUTHOR_EMAIL}",
             replyTo: '',
             cc: '',
             bcc: '',
@@ -100,7 +100,7 @@ pipeline{
             echo "Sending email for job failed..."
 
             mail charset: 'UTF-8', from: '', mimeType: 'text/html',
-            to: "${AUTHOR_EMAIL}",
+            to: "${env.CHANGE_AUTHOR_EMAIL}",
             replyTo: '',
             cc: '',
             bcc: '',
@@ -112,7 +112,7 @@ pipeline{
             echo 'Job is unstable!'
             echo 'Sending email for unstable job!'
             mail charset: 'UTF-8', from: '', mimeType: 'text/html',
-            to: "${AUTHOR_EMAIL}",
+            to: "${env.CHANGE_AUTHOR_EMAIL}",
             cc: '',
             replyTo: '',
             bcc: '',
