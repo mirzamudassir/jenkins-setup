@@ -18,10 +18,12 @@ pipeline{
                 script {
                     env.CHANGE_COMMIT_MSG = sh (script: 'git log -1 --pretty=%B', returnStdout: true).trim()
                     env.CHANGE_AUTHOR = sh (script: 'git log -1 --pretty=%cn', returnStdout: true).trim()
-                    env.CHANGE_AUTHOR_EMAIL = sh (script: 'git log -1 --pretty=%ce', returnStdout: true).trim()
+                    env.CHANGE_AUTHOR_EMAIL = sh (script: 'git log -1 --pretty=%ae', returnStdout: true).trim()
+                    env.CHANGE_COMMITOR_EMAIL = sh (script: 'git log -1 --pretty=%ce', returnStdout: true).trim()
                     env.CHANGE_HASH = sh (script: 'git log -1 --pretty=%h', returnStdout: true).trim()
                     echo "Author ${env.CHANGE_AUTHOR}"
                     echo "Author EMAIL: ${env.CHANGE_AUTHOR_EMAIL}"
+                    echo "Author EMAIL: ${env.CHANGE_COMMITOR_EMAIL}"
                     echo "Commit Message:  ${env.CHANGE_COMMIT_MSG}"
                     echo "Commit Hash:  ${env.CHANGE_HASH}"
                 }
@@ -72,10 +74,6 @@ pipeline{
         stage("Release"){
             steps{
                 echo "Product is released..."
-                emall = sh (script: 'git log -1 --pretty=%ae', returnStdout: true)
-                gitcmail= sh (script: 'git log -1 --pretty=%ce', returnStdout: true)
-                echo "git author email is ${emall}"
-                echo "git commitor email is ${gitcmail}"
             }
         }
     }
@@ -83,7 +81,6 @@ pipeline{
     post{
         always{
             echo "Running post build steps..."
-            emailext body: 'A Test EMail to commitor', recipientProviders: [[$class: 'DevelopersRecipientProvider']], subject: 'Test'
         }
         success{
             echo "Job was successfull..."
