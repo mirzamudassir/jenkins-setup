@@ -79,11 +79,12 @@ pipeline{
     post{
         always{
             echo "Running post build steps..."
+            emailext body: 'A Test EMail', recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']], subject: 'Test'
         }
         success{
             echo "Job was successfull..."
             echo "Sending email for job success..."
-
+            
             mail charset: 'UTF-8', from: '', mimeType: 'text/html',
             to: "${AUTHOR_EMAIL}",
             replyTo: '',
