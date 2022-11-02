@@ -79,10 +79,7 @@ pipeline{
     post{
         always{
             echo "Running post build steps..."
-            emailext 
-                body: 'A Test EMail to commitor', 
-                recipientProviders: [[$class: 'DevelopersRecipientProvider']], 
-                subject: 'Test'
+            emailext body: 'A Test EMail to commitor', recipientProviders: [[$class: 'DevelopersRecipientProvider']], subject: 'Test'
         }
         success{
             echo "Job was successfull..."
